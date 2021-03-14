@@ -1,13 +1,8 @@
 package org.ntutssl.termfrequency;
 
 import static org.junit.Assert.assertEquals;
-
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.swing.SortOrder;
-
 import org.junit.Test;
 
 public class WordFrequencyManagerTest 
@@ -60,7 +55,6 @@ public class WordFrequencyManagerTest
                     break;
             }
             test++;
-            System.out.println(s);
         }
         test = 3;
         li.clear();
