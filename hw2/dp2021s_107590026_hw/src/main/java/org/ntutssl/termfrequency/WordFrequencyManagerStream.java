@@ -1,7 +1,7 @@
 package org.ntutssl.termfrequency;
 
 import javax.swing.SortOrder;
-
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -38,12 +38,28 @@ public class WordFrequencyManagerStream implements IWordFrequencyManager {
 
     public List<String> getWordFrequency(SortOrder order) 
     { 
-        List<String> li = _WordFreqMap.entrySet().stream()
-        .sorted(Comparator.comparing(Map.Entry::getValue))
-        .map(Map.Entry::getKey)
-        .collect(Collectors.toList());
-        if(order.equals(SortOrder.DESCENDING)) Collections.reverse(li);
-        return li; 
+        List<String> li = new ArrayList<>();
+
+        if(order == SortOrder.UNSORTED)
+            li = _WordFreqMap.entrySet().stream().map(Map.Entry::getKey).collect(Collectors.toList());
+        else
+        {
+            if(order == SortOrder.ASCENDING)
+                li = _WordFreqMap.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getValue))
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+            else 
+            {
+                li = _WordFreqMap.entrySet().stream()
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .map(Map.Entry::getKey).collect(Collectors.toList());
+            }
+        }
+
+        List<String> newli = new ArrayList<>();
+        for(String s:li)
+            newli.add(s + ": " + _WordFreqMap.get(s) + "\n");
+        return newli; 
     }
 
     public void output(
@@ -53,6 +69,18 @@ public class WordFrequencyManagerStream implements IWordFrequencyManager {
         IOHandler handler
     )
     { 
-        handler.handleOutput(outputPath, range, null);
+        if(this.getWordFrequency(SortOrder.UNSORTED).size() == 0)
+            throw new WordFrequencyException("Word not found.");
+        
+        if(order.compareTo("asc") != 0 && order.compareTo("des") != 0)
+            throw new WordFrequencyException("The order should be \"asc\" or \"des\".");
+
+        if(range < 1 || range > this.getNumOfWords())
+            throw new WordFrequencyException("Out of range! The range should be from 1 to " + _WordFreqMap.size() + ".");
+
+        if(order.compareTo("asc") == 0)
+            handler.handleOutput(outputPath, range, this.getWordFrequency(SortOrder.ASCENDING));
+        else if(order.compareTo("des") == 0)
+            handler.handleOutput(outputPath, range, this.getWordFrequency(SortOrder.DESCENDING));
     }
 }

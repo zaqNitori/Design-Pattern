@@ -17,6 +17,8 @@ public class StopWordManager implements IStopWordManager
         {
             list.add(String.valueOf(c));
             list.add(String.valueOf((char)(c+32)));
+            set.add(String.valueOf(c));
+            set.add(String.valueOf((char)(c+32)));
         }
     }
 

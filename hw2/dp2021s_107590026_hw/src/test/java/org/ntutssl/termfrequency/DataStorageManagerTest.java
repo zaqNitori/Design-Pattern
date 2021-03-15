@@ -1,5 +1,6 @@
 package org.ntutssl.termfrequency;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -16,5 +17,7 @@ public class DataStorageManagerTest
         List<String> wordsList = dsm.getWords();
         assertTrue(wordsList.get(0).equals("the"));
         assertTrue(wordsList.contains("elizabeth"));
+        assertFalse(wordsList.contains("Elizabeth"));
+        assertTrue(wordsList.get(wordsList.size()-1).equals("ebooks"));
     }
 }

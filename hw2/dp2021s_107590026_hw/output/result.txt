@@ -1,0 +1,10 @@
+nicely: 1
+costing: 1
+abrupt: 1
+shooting: 1
+pollution: 1
+superlatively: 1
+spreading: 1
+coincide: 1
+avoidance: 1
+newspaper: 1

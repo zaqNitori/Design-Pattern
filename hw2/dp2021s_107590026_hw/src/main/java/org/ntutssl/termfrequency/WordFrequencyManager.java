@@ -2,7 +2,6 @@ package org.ntutssl.termfrequency;
 
 import java.util.Map;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import java.util.List;
 import java.util.ArrayList;
@@ -63,7 +62,7 @@ public class WordFrequencyManager implements IWordFrequencyManager
         
         List<String> li = new ArrayList<>();
         for (Map.Entry<String, Integer> mapping : list){
-            li.add(mapping.getKey());
+            li.add(mapping.getKey() + ": " + String.valueOf(mapping.getValue()) + "\n");
         }
 
         return li;
@@ -76,6 +75,18 @@ public class WordFrequencyManager implements IWordFrequencyManager
         IOHandler handler
     )
     { 
-        handler.handleOutput(outputPath, range, null);
+        if(this.getWordFrequency(SortOrder.UNSORTED).size() == 0)
+            throw new WordFrequencyException("Word not found.");
+        
+        if(order.compareTo("asc")!=0 && order.compareTo("des")!=0)
+            throw new WordFrequencyException("The order should be \"asc\" or \"des\".");
+
+        if(range < 1 || range > this.getNumOfWords())
+            throw new WordFrequencyException("Out of range! The range should be from 1 to " + _WordFreqMap.size() + ".");
+        
+        if(order == "asc")
+            handler.handleOutput(outputPath, range, this.getWordFrequency(SortOrder.ASCENDING));
+        else if(order == "des")
+            handler.handleOutput(outputPath, range, this.getWordFrequency(SortOrder.DESCENDING));
     }
 }
