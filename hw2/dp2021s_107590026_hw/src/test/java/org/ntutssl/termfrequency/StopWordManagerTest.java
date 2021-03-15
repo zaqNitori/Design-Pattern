@@ -21,6 +21,8 @@ public class StopWordManagerTest
         {
             assertTrue(swm.isStopWordSet(String.valueOf(c)));
             assertTrue(swm.isStopWordSet(String.valueOf((char)(c+32))));
+            assertTrue(swm.isStopWordList(String.valueOf(c)));
+            assertTrue(swm.isStopWordList(String.valueOf((char)(c+32))));
         }
     }
 

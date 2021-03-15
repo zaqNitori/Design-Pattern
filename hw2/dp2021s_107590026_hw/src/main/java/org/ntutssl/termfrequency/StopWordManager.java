@@ -13,6 +13,11 @@ public class StopWordManager implements IStopWordManager
         String pattern = ",";
         list = ioHandler.handleInputAsList(filePath, pattern);
         set = ioHandler.handleInputAsSet(filePath, pattern);
+        for(char c = 'A'; c <= 'Z' ;c++)                //insert alphabet
+        {
+            list.add(String.valueOf(c));
+            list.add(String.valueOf((char)(c+32)));
+        }
     }
 
     public boolean isStopWordList(String word) 

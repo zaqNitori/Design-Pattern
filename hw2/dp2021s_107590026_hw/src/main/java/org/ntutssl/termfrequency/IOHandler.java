@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
+
+import javax.xml.crypto.dsig.CanonicalizationMethod;
+
 import java.util.HashSet;
 import java.io.File;
 import java.io.IOException;
@@ -21,6 +24,8 @@ public class IOHandler {
         set = new HashSet<String>();
     }
 
+    public boolean isFileOpen() { return canOpenFile; }
+
     public List<String> handleInputAsList(String filePath, String pattern) 
     { 
         list.clear();
@@ -34,6 +39,7 @@ public class IOHandler {
                 s = s.toLowerCase();
                 list.add(s);                            //insert into list
             }
+            canOpenFile = true;
         }catch(IOException io)
         {
             canOpenFile = false;
@@ -55,17 +61,18 @@ public class IOHandler {
                 s = s.toLowerCase();
                 set.add(s);                             //insert into set
             }
+            canOpenFile = true;
+            for(char c = 'A'; c <= 'Z' ;c++)                //insert alphabet
+            {
+                set.add(String.valueOf(c));
+                set.add(String.valueOf((char)(c+32)));
+            }
+            set.add("");
         }catch(IOException io)
         {
             canOpenFile = false;
             System.out.println(filePath + " File not exist.");
         }
-        for(char c = 'A'; c <= 'Z' ;c++)                //insert alphabet
-        {
-            set.add(String.valueOf(c));
-            set.add(String.valueOf((char)(c+32)));
-        }
-        set.add("");
         return set;
     }
 
