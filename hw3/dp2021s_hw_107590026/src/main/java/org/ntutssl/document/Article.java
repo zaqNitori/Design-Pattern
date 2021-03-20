@@ -15,7 +15,10 @@ public class Article implements Document
     docList = new ArrayList<>();
     this.topic = topic;
     this.level = level;
+    docList.add(new Title(topic));
   }
+
+  public int getSize() { return docList.size(); }
 
   @Override
   public Document getContent(int index) { return docList.get(index); }
