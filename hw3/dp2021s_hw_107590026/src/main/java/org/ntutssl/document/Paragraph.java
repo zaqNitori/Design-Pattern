@@ -13,4 +13,9 @@ public class Paragraph implements Document {
   {  
     return paragraph;
   }
+
+  public Document getContent(int index) 
+  {
+    throw new DocumentException("Invalid Behavior: getContent.");
+  }
 }

@@ -20,7 +20,6 @@ public class Article implements Document
 
   public int getSize() { return docList.size(); }
 
-  @Override
   public Document getContent(int index) { return docList.get(index); }
 
   public String getText() { return topic; }
@@ -29,5 +28,13 @@ public class Article implements Document
   public int getLevel() { return level; }
   
   @Override
-  public void add(Document document) { docList.add(document); }
+  public void add(Document document) 
+  { 
+    if(document.getClass().equals(Article.class))
+    {
+      if(document.getLevel() < level)
+        throw new DocumentException("Invalid add: addLevel less than primitive level.");
+    }
+    docList.add(document); 
+  }
 }

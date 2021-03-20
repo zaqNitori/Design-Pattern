@@ -5,10 +5,7 @@ public interface Document
 
     public String getText();
 
-    default public Document getContent(int index)
-    {
-        throw new DocumentException("Invalid Behavior: getContent.");
-    }
+    public Document getContent(int index);
 
     default public int getLevel()
     {

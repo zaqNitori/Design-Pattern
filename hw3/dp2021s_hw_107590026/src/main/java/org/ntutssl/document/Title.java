@@ -13,4 +13,9 @@ public class Title implements Document {
   {  
     return title;
   }
+
+  public Document getContent(int index) 
+  {
+    throw new DocumentException("Invalid Behavior: getContent.");
+  }
 }
