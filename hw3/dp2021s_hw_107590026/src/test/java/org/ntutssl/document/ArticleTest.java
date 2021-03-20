@@ -13,10 +13,10 @@ public class ArticleTest
     public void testCorrect_addAndgetContent()
     {
         Article article = new Article("game",0);
-        article.add(new Title("book"));
+        article.add(new Paragraph("paragraph1"));
         
-        assertEquals(article.getSize(), 2);
-        assertEquals(article.getContent(1).getText(), "book");
+        assertEquals(article.getSize(), 1);
+        assertEquals(article.getContent(0).getText(), "paragraph1");
     }
 
     @Test
