@@ -1,7 +1,16 @@
 package org.ntutssl.document;
 
 public class Paragraph implements Document {
-  public Paragraph(String text) {  }
+  
+  private String paragraph;
 
-  public String getText() {  }
+  public Paragraph(String text) 
+  {  
+    paragraph = text;
+  }
+
+  public String getText() 
+  {  
+    return paragraph;
+  }
 }
