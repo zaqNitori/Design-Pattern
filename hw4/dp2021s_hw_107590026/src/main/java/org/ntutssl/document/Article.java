@@ -1,37 +1,66 @@
 package org.ntutssl.document;
 
-public class Article implements Document {
+import java.util.List;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Article implements Document 
+{
   
-  public Article(String topic, int level) {
+	private int _level;
+	private String _topic;
+	private List<Document> docList;
 
-  }
+	public Article(String topic, int level) 
+	{
+		_topic = topic;
+		_level = level;
+		docList = new ArrayList<>();
+	}
 
-  public String getText() {
+	public String getText() 
+	{
+		return _topic;
+	}
 
-  }
-
-  @Override
-  public int getLevel() {
-    
-  }
+	@Override
+	public int getLevel() 
+	{
+		return _level;
+	}
   
-  @Override
-  public void add(Document document) {
-    
-  }
+	@Override
+	public void add(Document document) 
+	{
+		if(document.getClass().equals(Article.class))
+			if(document.getLevel() > _level)
+				throw new DocumentException("Invalid add: Article level <= primitive level!");
 
-  @Override
-  public Iterator<Document> iterator() {
-    
-  }
+		docList.add(document);
+	}
 
-  @Override
-  public void accept(Visitor visitor) {
-    
-  }
+	public int getListSize() { return docList.size(); }
 
-  @Override
-  public String toString() {
-    
-  }
+	@Override
+	public Iterator<Document> iterator() 
+	{
+		return docList.iterator();
+	}
+
+	@Override
+	public void accept(Visitor visitor) 
+	{
+		visitor.visitArticle(this);
+		for(Document doc:docList)
+			doc.accept(visitor);
+	}
+
+	@Override
+	public String toString()
+	{
+		String s = "Article\t\t topic: " + _topic + 
+		"\n\t\tlevel: " + _level;
+		return s;
+	}
 }

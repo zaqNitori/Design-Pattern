@@ -1,19 +1,28 @@
 package org.ntutssl.document;
 
-public class Editor {  
-  public Editor() {
-    
-  }
+import java.util.Iterator;
 
-  public void add(Document document) {
-    
-  }
+public class Editor 
+{  
+	private int _size;
 
-  public int size() {
-    
-  }
+	public Editor() 
+	{
 
-  public Iterator<Document> iterator() {
-    
-  }
+	}
+
+	public void add(Document document) 
+	{
+
+	}
+
+	public int size() 
+	{
+		return _size;
+	}
+
+	public Iterator<Document> iterator() 
+	{
+		return null;
+	}
 }

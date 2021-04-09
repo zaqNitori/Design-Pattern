@@ -3,14 +3,17 @@ package org.ntutssl.document;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class NullIterator {
-  @Override
-  public boolean hasNext() {
-    
-  }
+public class NullIterator implements Iterator 
+{
+	@Override
+	public boolean hasNext() 
+	{
+		return false;
+	}
 
-  @Override
-  public Document next() {
-    
-  }
+	@Override
+	public Document next() 
+	{
+		throw new NoSuchElementException("No Such Element!");
+	}
 }

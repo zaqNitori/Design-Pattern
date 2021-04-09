@@ -1,25 +1,39 @@
 package org.ntutssl.document;
 
-public class Title implements Document {
-  public Title(String text, int size) {
-    
-  }
+import java.util.Iterator;
 
-  public String getText() {
-    
-  }
+public class Title implements Document 
+{
+	private String _text;
+	private int _size;
 
-  public int getSize() {
-    
-  }
+	public Title(String text, int size) 
+	{
+		_text = text;
+		_size = size;
+	}
 
-  @Override
-  public void accept(Visitor visitor) {
-    
-  }
+	public String getText() 
+	{
+		return _text;
+	}
 
-  @Override
-  public String toString() {
-    
-  }
+	public int getSize() 
+	{
+		return _size;
+	}
+
+	@Override
+	public void accept(Visitor visitor) 
+	{
+		visitor.visitTitle(this);
+	}
+
+	@Override
+	public String toString() 
+	{
+		String s = "Title\t\t text: " + _text + 
+		"\n\t\tsize: " + _size;
+		return s;
+	}
 }
