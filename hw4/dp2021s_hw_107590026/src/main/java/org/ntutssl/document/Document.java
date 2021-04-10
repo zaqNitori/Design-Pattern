@@ -16,9 +16,8 @@ public interface Document
 
 	public default Iterator<Document> iterator() 
 	{
-		/*NullIterator nullIterator;
-		return nullIterator.iterator();*/
-		return null;
+		Iterator<Document> dIterator = new NullIterator();
+		return dIterator;
 	}
 
 	public default int getSize() 

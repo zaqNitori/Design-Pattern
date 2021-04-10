@@ -17,7 +17,7 @@ public class InstructionHandler {
 	
 	}
 
-	private Document addTitleInstruction() {
+	/*private Document addTitleInstruction() {
 		
 	}
 
@@ -27,7 +27,7 @@ public class InstructionHandler {
 
 	private Document addArticleInstruction(int lastLevel) {
 		
-	}
+	}*/
 
 	private void printArticleInstructions() {
 		
