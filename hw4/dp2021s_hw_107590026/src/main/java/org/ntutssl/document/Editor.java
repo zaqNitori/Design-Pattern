@@ -1,28 +1,31 @@
 package org.ntutssl.document;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Editor 
 {  
-	private int _size;
+	private List<Document> docList;
 
 	public Editor() 
 	{
-
+		docList = new ArrayList<>();
 	}
 
 	public void add(Document document) 
 	{
-
+		docList.add(document);
 	}
 
 	public int size() 
 	{
-		return _size;
+		return docList.size();
 	}
 
 	public Iterator<Document> iterator() 
 	{
-		return null;
+		Iterator<Document> docIter = docList.iterator();
+		return docIter;
 	}
 }

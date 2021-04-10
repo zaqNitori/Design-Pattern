@@ -17,7 +17,7 @@ public class ArticleTest
     public String s = "hello";
 
     @Test
-    public void testParagraphGetText()
+    public void testArticleGetText()
     {
         Article article = new Article(s,1);
 
@@ -25,7 +25,7 @@ public class ArticleTest
     }
 
     @Test
-	public void testParagraphGetLevel()
+	public void testArticleGetLevel()
 	{
 		Article article = new Article(s,1);
 
@@ -33,7 +33,7 @@ public class ArticleTest
 	}
 
     @Test
-	public void testParagraphAdd()
+	public void testArticleAdd()
 	{
 		Article article = new Article(s,1);
 
@@ -43,7 +43,7 @@ public class ArticleTest
 	}
 
     @Test
-	public void testParagraphGetSize()
+	public void testArticleGetSize()
 	{
 		Article article = new Article(s,1);
 
@@ -53,7 +53,7 @@ public class ArticleTest
 	}
 
     @Test
-	public void testParagraphIterator()
+	public void testArticleIterator()
 	{
 		Article article = new Article(s,1);
 
@@ -67,11 +67,24 @@ public class ArticleTest
 	}
 
     @Test
-	public void testParagraphtoString()
+	public void testArticletoString()
 	{
 		Article article = new Article(s,1);
 
 		assertEquals("Article\t\t topic: " + s + 
 		"\n\t\tlevel: " + 1 ,article.toString());
 	}
+
+	@Test
+	public void testArticleAddSmallerLevel()
+	{
+		Article article = new Article(s,2);
+
+        Article article2 = new Article(s,1);
+
+        /*expected.expect(DocumentException.class);
+		expected.expectMessage("Invalid Input: The level should be positive or higher than the level of the current article.");
+		article.add(article2);*/
+	}
+
 }

@@ -34,8 +34,11 @@ public class Article implements Document
 	public void add(Document document) 
 	{
 		if(document.getClass().equals(Article.class))
-			if(document.getLevel() > _level)
-				throw new DocumentException("Invalid add: Article level <= primitive level!");
+			if(document.getLevel() <= _level)
+			{
+				System.out.println("Invalid Input: The level should be positive or higher than the level of the current article.");
+				return;
+			}
 
 		docList.add(document);
 	}
@@ -52,8 +55,8 @@ public class Article implements Document
 	public void accept(Visitor visitor) 
 	{
 		visitor.visitArticle(this);
-		for(Document doc:docList)
-			doc.accept(visitor);
+		/*for(Document doc:docList)
+			doc.accept(visitor);*/
 	}
 
 	@Override
