@@ -3,7 +3,9 @@ package org.ntutssl.document;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Iterator;
+import java.io.PrintStream;
 
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -11,6 +13,7 @@ import org.junit.Rule;
 
 public class ArticleTest 
 { 
+
     @Rule
     public ExpectedException expected = ExpectedException.none();
 
@@ -78,13 +81,18 @@ public class ArticleTest
 	@Test
 	public void testArticleAddSmallerLevel()
 	{
+		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		PrintStream printStream = new PrintStream(stream);
+		System.setOut(printStream);
+
 		Article article = new Article(s,2);
 
         Article article2 = new Article(s,1);
 
-        /*expected.expect(DocumentException.class);
-		expected.expectMessage("Invalid Input: The level should be positive or higher than the level of the current article.");
-		article.add(article2);*/
+        article.add(article2);
+
+    	assertEquals("Invalid Input: The level should be positive or higher than the level of the current article.\n"
+		, stream.toString());
 	}
 
 }

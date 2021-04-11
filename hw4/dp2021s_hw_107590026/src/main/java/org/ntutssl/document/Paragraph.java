@@ -1,7 +1,5 @@
 package org.ntutssl.document;
 
-import java.util.Iterator;
-
 public class Paragraph implements Document 
 {
 

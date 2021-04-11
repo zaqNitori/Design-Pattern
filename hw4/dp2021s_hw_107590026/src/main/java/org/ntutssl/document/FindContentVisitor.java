@@ -10,25 +10,25 @@ public class FindContentVisitor implements Visitor
 
 	public FindContentVisitor(String target) 
 	{
-		_target = target;
+		_target = target.toLowerCase();
 		docList = new ArrayList<>();
 	}
 
 	public void visitParagraph(Paragraph paragraph) 
 	{
-		if(paragraph.getText().indexOf(_target) != -1)
+		if(paragraph.getText().toLowerCase().indexOf(_target) != -1)
 			docList.add(paragraph);
 	}
 
 	public void visitTitle(Title title) 
 	{
-		if(title.getText().indexOf(_target) != -1)
+		if(title.getText().toLowerCase().indexOf(_target) != -1)
 			docList.add(title);
 	}
 
 	public void visitArticle(Article article) 
 	{
-		if(article.getText().indexOf(_target) != -1)
+		if(article.getText().toLowerCase().indexOf(_target) != -1)
 			docList.add(article);
 	}
 

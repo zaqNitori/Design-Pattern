@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class HtmlOutputVisitor 
+public class HtmlOutputVisitor implements Visitor
 {
 	private List<Document> docList;
 
@@ -70,7 +70,7 @@ public class HtmlOutputVisitor
 	private String addTab(int layer)
 	{
 		String out = "";
-		while(layer-- > 0) out += "\t";
+		while(layer-- > 0) out += "  ";
 		return out;
 	}
 

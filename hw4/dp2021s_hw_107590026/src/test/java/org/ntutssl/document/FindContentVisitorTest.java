@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class FindContentVisitorTest 
 { 
     public String msg1 = "hello1";
-    public String msg2 = "hello2";
+    public String msg2 = "Hello2";
     public String msg3 = "bye3";
 
     @Test
@@ -34,7 +34,7 @@ public class FindContentVisitorTest
     {
         FindContentVisitor fdVisitor = new FindContentVisitor("hello");
         Title title = new Title(msg1,msg1.length());
-        Paragraph paragraph = new Paragraph(msg2);
+        Paragraph paragraph = new Paragraph(msg2);      //uppercase can also be matched.
         Article article = new Article(msg3,1);
 
         fdVisitor.visitTitle(title);

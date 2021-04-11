@@ -2,7 +2,6 @@ package org.ntutssl.document;
 
 import java.util.List;
 import java.util.Iterator;
-import java.util.List;
 import java.util.ArrayList;
 
 public class Article implements Document 
@@ -36,7 +35,7 @@ public class Article implements Document
 		if(document.getClass().equals(Article.class))
 			if(document.getLevel() <= _level)
 			{
-				System.out.println("Invalid Input: The level should be positive or higher than the level of the current article.");
+				System.out.print("Invalid Input: The level should be positive or higher than the level of the current article.\n");
 				return;
 			}
 
@@ -55,8 +54,6 @@ public class Article implements Document
 	public void accept(Visitor visitor) 
 	{
 		visitor.visitArticle(this);
-		/*for(Document doc:docList)
-			doc.accept(visitor);*/
 	}
 
 	@Override

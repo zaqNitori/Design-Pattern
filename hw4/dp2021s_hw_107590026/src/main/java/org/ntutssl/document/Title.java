@@ -1,7 +1,5 @@
 package org.ntutssl.document;
 
-import java.util.Iterator;
-
 public class Title implements Document 
 {
 	private String _text;
