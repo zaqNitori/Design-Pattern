@@ -30,8 +30,8 @@ public class Title implements Document
 	@Override
 	public String toString() 
 	{
-		String s = "Title\t\t text: " + _text + 
-		"\n\t\tsize: " + _size;
+		String s = "Title\t\ttext: " + _text + 
+		"\n\t\tsize: " + _size + "\n";
 		return s;
 	}
 }

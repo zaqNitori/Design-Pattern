@@ -22,7 +22,7 @@ public class InstructionHandler
 		while(true)
 		{
 			printEditorInstructions();
-			cmd = sc.nextLine();
+			cmd = sc.nextLine().trim();
 			if(cmd.matches("exit"))
 				break;
 			else
@@ -66,7 +66,7 @@ public class InstructionHandler
 				while(true)
 				{
 					printArticleInstructions();
-					cmd = sc.nextLine();
+					cmd = sc.nextLine().trim();
 					if(cmd.matches("exit"))
 						break;
 					else
@@ -90,9 +90,9 @@ public class InstructionHandler
 	{
 		System.out.println("Please enter the information of title:");
 		System.out.print("Text of title: ");
-		String text = sc.nextLine();
+		String text = sc.nextLine().trim();
 		System.out.print("Size of title: ");
-		int size = sc.nextInt();
+		int size = Integer.parseInt(sc.nextLine().trim());
 		if(size < 1 || size > 6)
 		{
 			System.out.println("Invalid Input: The size should be in range 1 to 6");
@@ -110,7 +110,7 @@ public class InstructionHandler
 	{
 		System.out.println("Please enter the information of paragraph:");
 		System.out.print("Text of paragraph: ");
-		String text = sc.nextLine();
+		String text = sc.nextLine().trim();
 		Paragraph paragraph = new Paragraph(text);
 		System.out.println("Paragraph added to the editor.");
 		return paragraph;
@@ -120,9 +120,9 @@ public class InstructionHandler
 	{
 		System.out.println("Please enter the information of article:");
 		System.out.print("Text of article: ");
-		String topic = sc.nextLine();
+		String topic = sc.nextLine().trim();
 		System.out.print("Level of article: ");
-		int level = sc.nextInt();
+		int level = Integer.parseInt(sc.nextLine().trim());
 		if(level <= lastLevel)
 		{
 			System.out.println("Invalid Input: The level should be positive or higher than the level of the current article");
@@ -146,6 +146,7 @@ public class InstructionHandler
 
 	private void handleArticleInstructions(String instruction, Article article) 
 	{
+		String cmd;
 		Document doc;
 		if(instruction.matches("add title"))
 		{
@@ -163,7 +164,18 @@ public class InstructionHandler
 		{
 			doc = addArticleInstruction(article.getLevel());
 			if(doc != null)
+			{
 				article.add(doc);
+				while(true)
+				{
+					printArticleInstructions();
+					cmd = sc.nextLine().trim();
+					if(cmd.matches("exit"))
+						break;
+					else
+						handleArticleInstructions(cmd, (Article)doc);
+				}
+			}
 		}
 		else System.out.println("Invalid Instruction");
 		return;
@@ -173,21 +185,12 @@ public class InstructionHandler
 	{
 		String target;
 		System.out.println("Enter the word you want to find: ");
-		target = sc.nextLine();
-		Document doc;
+		target = sc.nextLine().trim();
 		FindContentVisitor fcv = new FindContentVisitor(target);
 		Iterator<Document> docIter = _editor.iterator();
 
 		while(docIter.hasNext())
-		{
-			doc = docIter.next();
-			if(doc.equals(Article.class))
-				fcv.visitArticle((Article)doc);
-			else if(doc.equals(Paragraph.class))
-				fcv.visitParagraph((Paragraph)doc);
-			else if(doc.equals(Title.class))
-				fcv.visitTitle((Title)doc);
-		}
+			docIter.next().accept(fcv);
 
 		List<Document> docList = fcv.getResult();
 		for(Document document:docList)
@@ -197,6 +200,12 @@ public class InstructionHandler
 	private void outputHtmlInstruction() 
 	{
 		HtmlOutputVisitor hov = new HtmlOutputVisitor();
+
+		Iterator<Document> docIter = _editor.iterator();
+
+		while(docIter.hasNext())
+			docIter.next().accept(hov);
+
 		System.out.println(hov.getResult());
 	}
 }

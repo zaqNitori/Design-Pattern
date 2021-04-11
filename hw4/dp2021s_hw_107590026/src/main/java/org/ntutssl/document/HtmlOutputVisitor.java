@@ -1,69 +1,55 @@
 package org.ntutssl.document;
 
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 public class HtmlOutputVisitor implements Visitor
 {
-	private List<Document> docList;
+	private String outputString="";
 
 	public HtmlOutputVisitor() 
 	{
-		docList = new ArrayList<>();
+
 	}
 
 	public void visitParagraph(Paragraph paragraph) 
 	{
-		docList.add(paragraph);
+		outputString += "<p>" + paragraph.getText() + "</p>\n";
 	}
 
 	public void visitTitle(Title title) 
 	{
-		docList.add(title);
+		outputString += ("<h" + title.getSize() + ">" + title.getText() + "</h" + title.getSize() + ">\n");
 	}
 
 	public void visitArticle(Article article) 
 	{
-		docList.add(article);
+		outputString += recurArticle(article,1);
 	}
-
-	public int getListSize() { return docList.size(); }
 
 	public String getResult() 
 	{
-		String out="";
-		for(Document doc:docList)
-		{
-			if(doc.getClass().equals(Article.class))
-				out += recurArticle(doc,1);
-			if(doc.getClass().equals(Paragraph.class))
-				out += "<p>" + doc.getText() + "</p>\n";
-			if(doc.getClass().equals(Title.class))
-				out += ("<h1>" + doc.getText() + "</h1>\n");
-		}
-		return out;
+		return outputString;
 	}
 
-	private String recurArticle(Document article,int layer)
+	private String recurArticle(Article article,int layer)
 	{
 		String out="";
 		Iterator<Document> docIter = article.iterator();
 		Document doc;
 
-		out += "<article topic=\'" + article.getText() + "\'>\n";
+		out += "<article topic='" + article.getText() + "'>\n";
 		while(docIter.hasNext())
 		{
 			doc = docIter.next();
 			out += addTab(layer);
 			if(doc.getClass().equals(Article.class))
-				recurArticle(doc,layer+1);
-			if(doc.getClass().equals(Paragraph.class))
+				out += recurArticle((Article)doc,layer+1);
+			else if(doc.getClass().equals(Paragraph.class))
 				out += "<p>" + doc.getText() + "</p>\n";
-			if(doc.getClass().equals(Title.class))
+			else if(doc.getClass().equals(Title.class))
 				out += ("<h" + doc.getSize() + ">" + doc.getText() + "</h" + doc.getSize() + ">\n");
 		}
-		out += "</article>\n";
+		out += addTab(layer-1) + "</article>\n";
 		return out;
 	}
 

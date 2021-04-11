@@ -20,28 +20,27 @@ public class HtmlOutputVisitorTest
         Paragraph paragraph = new Paragraph(msg2);
         Article article = new Article(msg3,1);
 
-        assertEquals(0,hoVisitor.getListSize());
         hoVisitor.visitTitle(title);
-        assertEquals(1,hoVisitor.getListSize());
         hoVisitor.visitParagraph(paragraph);
-        assertEquals(2,hoVisitor.getListSize());
         hoVisitor.visitArticle(article);
-        assertEquals(3,hoVisitor.getListSize());
     }
 
     @Test
     public void testGetResult()
     {
         HtmlOutputVisitor hoVisitor = new HtmlOutputVisitor();
-        Title title = new Title(msg1,msg1.length());
+        Article article = new Article(msg3, 1);
+        Title title = new Title(msg1,1);
         Paragraph paragraph = new Paragraph(msg2);
 
-        hoVisitor.visitTitle(title);
-        hoVisitor.visitParagraph(paragraph);
+        article.add(title);
+        article.add(paragraph);
+
+        article.accept(hoVisitor);
         
         System.out.println(hoVisitor.getResult());
 
-        assertEquals("<h1>hello1</h1>\n<p>hello2</p>\n"
+        assertEquals("<article topic='bye3'>\n  <h1>hello1</h1>\n  <p>hello2</p>\n</article>\n"
         ,hoVisitor.getResult());
     }
 }

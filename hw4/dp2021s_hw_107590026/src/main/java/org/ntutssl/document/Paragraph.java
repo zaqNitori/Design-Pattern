@@ -24,7 +24,7 @@ public class Paragraph implements Document
 	@Override
 	public String toString() 
 	{
-		String s = "Paragraph\t\t text: " + _text;
+		String s = "Paragraph\ttext: " + _text + "\n";
 		return s;
 	}
 }

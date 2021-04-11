@@ -37,8 +37,8 @@ public class TitleTest
 		String msg = "hello";
 		Title title = new Title(msg,msg.length());
 
-		assertEquals("Title\t\t text: " + msg + 
-		"\n\t\tsize: " + msg.length(),title.toString());
+		assertEquals("Title\t\ttext: " + msg + "\n\t\tsize: " + msg.length() + "\n"
+		,title.toString());
 	}
 
 	@Test

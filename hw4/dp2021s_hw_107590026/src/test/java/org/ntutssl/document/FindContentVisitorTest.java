@@ -20,13 +20,26 @@ public class FindContentVisitorTest
         Paragraph paragraph = new Paragraph(msg2);
         Article article = new Article(msg3,1);
 
-        assertEquals(0,fdVisitor.getListSize());
         fdVisitor.visitTitle(title);
-        assertEquals(1,fdVisitor.getListSize());
         fdVisitor.visitParagraph(paragraph);
-        assertEquals(2,fdVisitor.getListSize());
         fdVisitor.visitArticle(article);
-        assertEquals(2,fdVisitor.getListSize());
+
+        assertEquals(3, fdVisitor.getListSize());
+    }
+
+    @Test
+    public void testVisitArticle()
+    {
+        FindContentVisitor fdVisitor = new FindContentVisitor("hello");
+        Title title = new Title(msg1,msg1.length());
+        Paragraph paragraph = new Paragraph(msg2);
+        Article article = new Article(msg3,1);
+
+        article.add(title);
+        article.add(paragraph);
+        article.accept(fdVisitor);
+
+        assertEquals(3, fdVisitor.getListSize());
     }
 
     @Test

@@ -33,12 +33,11 @@ public class Article implements Document
 	public void add(Document document) 
 	{
 		if(document.getClass().equals(Article.class))
+		{
 			if(document.getLevel() <= _level)
-			{
-				System.out.print("Invalid Input: The level should be positive or higher than the level of the current article.\n");
-				return;
-			}
-
+				throw new DocumentException("Invalid Input: The level should be positive or higher than the level of the current article.");
+		}
+			
 		docList.add(document);
 	}
 
@@ -59,8 +58,8 @@ public class Article implements Document
 	@Override
 	public String toString()
 	{
-		String s = "Article\t\t topic: " + _topic + 
-		"\n\t\tlevel: " + _level;
+		String s = "Article\t\ttopic: " + _topic + 
+		"\n\t\tlevel: " + _level + "\n";
 		return s;
 	}
 }

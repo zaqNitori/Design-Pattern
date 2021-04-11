@@ -74,25 +74,34 @@ public class ArticleTest
 	{
 		Article article = new Article(s,1);
 
-		assertEquals("Article\t\t topic: " + s + 
-		"\n\t\tlevel: " + 1 ,article.toString());
+		assertEquals("Article\t\ttopic: " + s + 
+		"\n\t\tlevel: " + 1 + "\n",article.toString());
 	}
 
 	@Test
 	public void testArticleAddSmallerLevel()
 	{
-		ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		PrintStream printStream = new PrintStream(stream);
-		System.setOut(printStream);
-
 		Article article = new Article(s,2);
 
         Article article2 = new Article(s,1);
 
+		expected.expect(DocumentException.class);
+		expected.expectMessage("Invalid Input: The level should be positive or higher than the level of the current article.");
         article.add(article2);
 
-    	assertEquals("Invalid Input: The level should be positive or higher than the level of the current article.\n"
-		, stream.toString());
+	}
+
+	@Test
+	public void testArticleAddSameLevel()
+	{
+		Article article = new Article(s,2);
+
+        Article article2 = new Article(s,2);
+
+		expected.expect(DocumentException.class);
+		expected.expectMessage("Invalid Input: The level should be positive or higher than the level of the current article.");
+        article.add(article2);
+
 	}
 
 }

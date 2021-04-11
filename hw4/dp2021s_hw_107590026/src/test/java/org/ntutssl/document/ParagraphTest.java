@@ -66,8 +66,7 @@ public class ParagraphTest
 	{
 		Paragraph paragraph = new Paragraph(s);
 
-		assertEquals("Paragraph\t\t text: " + s 
-        ,paragraph.toString());
+		assertEquals("Paragraph\ttext: " + s + "\n",paragraph.toString());
 	}
 
 }
