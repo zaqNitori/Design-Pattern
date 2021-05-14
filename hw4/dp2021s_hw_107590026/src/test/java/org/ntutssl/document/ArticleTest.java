@@ -1,11 +1,8 @@
 package org.ntutssl.document;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
-import java.io.ByteArrayOutputStream;
 import java.util.Iterator;
-import java.io.PrintStream;
 
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
