@@ -1,15 +1,21 @@
 package org.ntutssl.document;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 public class Article implements Document 
 {
 
 	private String _topic;
 	private int _level;
+	private List<Document> docList;
 
 	public Article(String topic, int level) 
 	{ 
 		_topic = topic;
 		_level = level;
+		docList = new ArrayList<>();
 	}
 
 	public String getText() 
@@ -24,12 +30,29 @@ public class Article implements Document
 	}
 
 	@Override
-	public void add(Document document) { }
+	public void add(Document document) 
+	{ 
+		if(document.getClass().equals(Article.class))
+		{
+			if(document.getLevel() <= _level)
+				throw new DocumentException("Invalid Input: The level should be positive or higher than the level of the current article");
+		}
+		docList.add(document);
+	}
 
 	@Override
-	public Iterator<Document> iterator() { }
+	public Iterator<Document> iterator() 
+	{ 
+		Iterator<Document> docIter = docList.iterator();
+		return docIter;
+	}
 
 	@Override
-	public String toString() { }
+	public String toString() 
+	{ 
+		String s = "Article\t\ttopic: " + _topic + 
+		"\n\t\tlevel: " + _level + "\n";
+		return s;
+	}
 
 }

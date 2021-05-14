@@ -1,3 +1,13 @@
 package org.ntutssl.document;
 
-public class ArticleTest { }
+import java.util.Iterator;
+
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
+
+public class ArticleTest 
+{ 
+
+}
