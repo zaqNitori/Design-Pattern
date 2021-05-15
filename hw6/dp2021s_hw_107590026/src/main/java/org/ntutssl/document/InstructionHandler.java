@@ -1,10 +1,11 @@
 package org.ntutssl.document;
 
-public class InstructionHandler {
+public class InstructionHandler 
+{
 
 	public InstructionHandler(Editor editor) { }
 
-	public void run() { }
+	/*public void run() { }
 
 	private void printEditorInstructions() { }
 	
@@ -24,5 +25,5 @@ public class InstructionHandler {
 
 	private void importJsonInstruction() { }
 
-	private void outputHtmlInstruction() { }
+	private void outputHtmlInstruction() { }*/
 }

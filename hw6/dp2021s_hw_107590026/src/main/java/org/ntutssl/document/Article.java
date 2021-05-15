@@ -29,6 +29,11 @@ public class Article implements Document
 		return _level;
 	}
 
+	public int getListSize()
+	{
+		return docList.size();
+	}
+
 	@Override
 	public void add(Document document) 
 	{ 

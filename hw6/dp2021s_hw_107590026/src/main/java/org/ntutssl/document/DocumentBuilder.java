@@ -7,17 +7,36 @@ package org.ntutssl.document;
  * DocumentBuilder itself, so you can build a large object using
  * a single statement.
  */
-class DocumentBuilder {
+class DocumentBuilder 
+{
 
-  public DocumentBuilder() { }
+	public DocumentBuilder()
+	{ 
 
-  public DocumentBuilder buildTitle(String text, int size) { }
+	}
 
-  public DocumentBuilder buildParagraph(String text) { }
+	/*public DocumentBuilder buildTitle(String text, int size) 
+	{ 
 
-  public DocumentBuilder startBuildArticle(String topic, int level) { }
+	}
 
-  public DocumentBuilder endBuildArticle() { }
+	public DocumentBuilder buildParagraph(String text) 
+	{ 
+		
+	}
 
-  public Document getResult() { }
+	public DocumentBuilder startBuildArticle(String topic, int level) 
+	{ 
+
+	}
+
+	public DocumentBuilder endBuildArticle() 
+	{ 
+
+	}
+
+	public Document getResult() 
+	{ 
+
+	}*/
 }
