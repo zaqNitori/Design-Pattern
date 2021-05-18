@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
@@ -16,11 +14,13 @@ import java.util.Iterator;
 public class Editor
 {
 
+	private List<Document> docTarget;
 	private List<Document> docList;
 	private DocumentParser documentParser;
 
 	public Editor() 
 	{ 
+		docTarget = new ArrayList<>();
 		docList = new ArrayList<>();
 		documentParser = new DocumentParser();
 	}
@@ -32,12 +32,7 @@ public class Editor
 		{
             JsonArray jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
 
-			//jsonArray.forEach((obj) -> docList.add(documentParser.parse(obj.getAsJsonObject())));
-
-			for(JsonElement jsonElement: jsonArray)
-			{
-				docList.add(documentParser.parse(jsonElement.getAsJsonObject()));
-			}
+			jsonArray.forEach((obj) -> docList.add(documentParser.parse(obj.getAsJsonObject())));
 		} 
 		catch (IOException e) 
 		{
@@ -46,15 +41,25 @@ public class Editor
 
 	}
 
-	public void exportDocumentAsHtmlFile(String outputPath) { }
+	public void exportDocumentAsHtmlFile(String outputPath) 
+	{ 
+		
+	}
 
 	public void findContent(String target) 
 	{ 
-		List<Document> docTarget = new ArrayList<>();
+		docTarget = new ArrayList<>();
 		FindContentConsumer fcc = new FindContentConsumer(docTarget, target);
 		for(Document doc: docList)
 			fcc.accept(doc);
-			
+		
+		for(Document doc: docTarget)
+			System.out.println(doc.toString());
+	}
+
+	public List<Document> getFindContent()
+	{
+		return docTarget;
 	}
 
 	public void add(Document document) 

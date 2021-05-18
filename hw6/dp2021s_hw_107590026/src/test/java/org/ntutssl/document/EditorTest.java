@@ -1,9 +1,9 @@
 package org.ntutssl.document;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -12,7 +12,11 @@ public class EditorTest
 { 
     public String text = "hello";
     public Editor editor = new Editor();
-    public Paragraph paragraph = new Paragraph(text);
+    Title title = new Title("I'm a simple title", 1);
+    Paragraph paragraph = new Paragraph("I'm a simple paragraph");
+    Article article = new Article("I'm a simple article", 1);
+
+        
 
 
     @Test
@@ -34,7 +38,7 @@ public class EditorTest
     @Test
     public void testIterator()
     {
-        editor.add(paragraph);
+        editor.add(new Paragraph(text));
         Iterator<Document> docIter = editor.iterator();
 
         while(docIter.hasNext())
@@ -48,10 +52,6 @@ public class EditorTest
     {
         editor.importDocumentFromJsonFile("input/test_input.json");
     
-        Title title = new Title("I'm a simple title", 1);
-        Paragraph paragraph = new Paragraph("I'm a simple paragraph");
-        Article article = new Article("I'm a simple article", 1);
-
         Iterator<Document> docIter = editor.iterator();
         
         assertEquals(title.toString(), docIter.next().toString());
@@ -63,9 +63,15 @@ public class EditorTest
     @Test
     public void testFindContent()
     {
-        Title title = new Title("Hello world!", 1);
+        
+        editor.importDocumentFromJsonFile("input/test_input.json");
+        editor.findContent("simple");
 
-        assertTrue(title.getText().contains("o w"));
+        List<Document> docTarget = editor.getFindContent();
+
+        assertEquals(title.toString(), docTarget.get(0).toString());
+        assertEquals(paragraph.toString(), docTarget.get(1).toString());
+        assertEquals(article.toString(), docTarget.get(2).toString());
     }
 
 }
