@@ -14,13 +14,13 @@ import java.util.Iterator;
 public class Editor
 {
 
+	private List<String> strOutputList;
 	private List<Document> docTarget;
 	private List<Document> docList;
 	private DocumentParser documentParser;
 
 	public Editor() 
 	{ 
-		docTarget = new ArrayList<>();
 		docList = new ArrayList<>();
 		documentParser = new DocumentParser();
 	}
@@ -43,18 +43,22 @@ public class Editor
 
 	public void exportDocumentAsHtmlFile(String outputPath) 
 	{ 
-		
+		strOutputList = new ArrayList<>();
+		HtmlOutputConsumer hoc = new HtmlOutputConsumer(strOutputList);
+
+		docList.forEach((doc) -> hoc.accept(doc));
+
+		strOutputList.forEach((str) -> System.out.println(str));
 	}
 
 	public void findContent(String target) 
 	{ 
 		docTarget = new ArrayList<>();
 		FindContentConsumer fcc = new FindContentConsumer(docTarget, target);
-		for(Document doc: docList)
-			fcc.accept(doc);
 		
-		for(Document doc: docTarget)
-			System.out.println(doc.toString());
+		docList.forEach((doc) -> fcc.accept(doc));
+
+		docTarget.forEach((doc) -> System.out.println(doc.toString()));
 	}
 
 	public List<Document> getFindContent()

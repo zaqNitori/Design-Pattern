@@ -10,14 +10,13 @@ import org.junit.Test;
 
 public class EditorTest 
 { 
+
+    public String filePath = "input/test_input.json";
     public String text = "hello";
     public Editor editor = new Editor();
     Title title = new Title("I'm a simple title", 1);
     Paragraph paragraph = new Paragraph("I'm a simple paragraph");
     Article article = new Article("I'm a simple article", 1);
-
-        
-
 
     @Test
     public void testAdd()
@@ -50,7 +49,7 @@ public class EditorTest
     @Test
     public void testImportDocument()
     {
-        editor.importDocumentFromJsonFile("input/test_input.json");
+        editor.importDocumentFromJsonFile(filePath);
     
         Iterator<Document> docIter = editor.iterator();
         
@@ -64,7 +63,7 @@ public class EditorTest
     public void testFindContent()
     {
         
-        editor.importDocumentFromJsonFile("input/test_input.json");
+        editor.importDocumentFromJsonFile(filePath);
         editor.findContent("simple");
 
         List<Document> docTarget = editor.getFindContent();
@@ -72,6 +71,13 @@ public class EditorTest
         assertEquals(title.toString(), docTarget.get(0).toString());
         assertEquals(paragraph.toString(), docTarget.get(1).toString());
         assertEquals(article.toString(), docTarget.get(2).toString());
+    }
+
+    @Test
+    public void testExport()
+    {
+        editor.importDocumentFromJsonFile("input/sample_input.json");
+        editor.exportDocumentAsHtmlFile("1230");
     }
 
 }
