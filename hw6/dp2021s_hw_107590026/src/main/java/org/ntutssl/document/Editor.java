@@ -1,7 +1,15 @@
 package org.ntutssl.document;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 
 import java.util.Iterator;
 
@@ -9,17 +17,41 @@ public class Editor
 {
 
 	private List<Document> docList;
+	private DocumentParser documentParser;
 
 	public Editor() 
 	{ 
 		docList = new ArrayList<>();
+		documentParser = new DocumentParser();
 	}
 
-	public void importDocumentFromJsonFile(String filePath) { }
+	public void importDocumentFromJsonFile(String filePath) 
+	{
+		
+        try(JsonReader reader = new JsonReader(new FileReader(filePath))) 
+		{
+            JsonArray jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
+
+			//jsonArray.forEach((obj) -> docList.add(documentParser.parse(obj.getAsJsonObject())));
+
+			for(JsonElement jsonElement: jsonArray)
+			{
+				docList.add(documentParser.parse(jsonElement.getAsJsonObject()));
+			}
+		} 
+		catch (IOException e) 
+		{
+            e.printStackTrace();
+        }
+
+	}
 
 	public void exportDocumentAsHtmlFile(String outputPath) { }
 
-	public void findContent(String target) { }
+	public void findContent(String target) 
+	{ 
+		
+	}
 
 	public void add(Document document) 
 	{ 

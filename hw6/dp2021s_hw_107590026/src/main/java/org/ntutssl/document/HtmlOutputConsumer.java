@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 public class HtmlOutputConsumer implements Consumer<Document> 
 {
 
+	private List<String> strList;
 	/**
 	 * @param result you should add the result into here.
 	 * 
@@ -18,7 +19,7 @@ public class HtmlOutputConsumer implements Consumer<Document>
 	 */
 	public HtmlOutputConsumer(List<String> result) 
 	{ 
-
+		strList = result;
 	}
 
 	public void accept(Document document) 
