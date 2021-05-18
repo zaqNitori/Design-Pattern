@@ -52,7 +52,7 @@ public class Editor
 		try(FileWriter writeFile = new FileWriter(outputPath)) 
 		{
             for(String str: strOutputList)
-				writeFile.write(str + "\n");
+				writeFile.write(str);
         } catch (IOException e) 
 		{
             System.out.println("An error occurred.");

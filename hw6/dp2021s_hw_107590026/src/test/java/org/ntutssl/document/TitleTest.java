@@ -1,6 +1,8 @@
 package org.ntutssl.document;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -11,7 +13,7 @@ import org.junit.rules.ExpectedException;
 public class TitleTest 
 { 
     @Rule
-    public ExpectedException exception = ExpectedException.none();
+    public ExpectedException expection = ExpectedException.none();
     
     public String text = "hello";
     public int size = 2;
@@ -32,8 +34,8 @@ public class TitleTest
     @Test
     public void testGetLevel()
     {
-        exception.expect(DocumentException.class);
-        exception.expectMessage("Invalid action: getLevel.");
+        expection.expect(DocumentException.class);
+        expection.expectMessage("Invalid action: getLevel.");
         
         title.getLevel();
     }
@@ -41,8 +43,8 @@ public class TitleTest
     @Test
     public void testAdd()
     {
-        exception.expect(DocumentException.class);
-        exception.expectMessage("Invalid action: add.");
+        expection.expect(DocumentException.class);
+        expection.expectMessage("Invalid action: add.");
         
         title.add(new Title(text, size));
     }
@@ -53,6 +55,16 @@ public class TitleTest
         Iterator<Document> docIter = title.iterator();
         assertFalse(docIter.hasNext());
     }
+    
+    @Test
+    public void testNext()
+    {
+        Iterator<Document> docIter = title.iterator();
+        expection.expect(NoSuchElementException.class);
+        expection.expectMessage("No Such Element!");
+
+        docIter.next();
+    }
 
     @Test
     public void testToString()
@@ -60,4 +72,6 @@ public class TitleTest
         assertEquals("Title\t\ttext: " + text + 
 		"\n\t\tsize: " + size + "\n", title.toString());
     }
+
+
 }

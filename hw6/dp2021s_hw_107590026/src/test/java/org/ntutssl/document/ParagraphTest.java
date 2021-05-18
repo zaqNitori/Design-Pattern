@@ -1,6 +1,8 @@
 package org.ntutssl.document;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -11,7 +13,7 @@ import org.junit.rules.ExpectedException;
 public class ParagraphTest 
 { 
     @Rule
-    public ExpectedException exception = ExpectedException.none();
+    public ExpectedException expection = ExpectedException.none();
     
     public String text = "hello";
     public Paragraph paragraph = new Paragraph(text);
@@ -25,8 +27,8 @@ public class ParagraphTest
     @Test
     public void testGetSize()
     {
-        exception.expect(DocumentException.class);
-        exception.expectMessage("Invalid action: getSize.");
+        expection.expect(DocumentException.class);
+        expection.expectMessage("Invalid action: getSize.");
         
         paragraph.getSize();
     }
@@ -34,8 +36,8 @@ public class ParagraphTest
     @Test
     public void testGetLevel()
     {
-        exception.expect(DocumentException.class);
-        exception.expectMessage("Invalid action: getLevel.");
+        expection.expect(DocumentException.class);
+        expection.expectMessage("Invalid action: getLevel.");
         
         paragraph.getLevel();
     }
@@ -43,8 +45,8 @@ public class ParagraphTest
     @Test
     public void testAdd()
     {
-        exception.expect(DocumentException.class);
-        exception.expectMessage("Invalid action: add.");
+        expection.expect(DocumentException.class);
+        expection.expectMessage("Invalid action: add.");
         
         paragraph.add(new Paragraph(text));
     }
@@ -54,6 +56,16 @@ public class ParagraphTest
     {
         Iterator<Document> docIter = paragraph.iterator();
         assertFalse(docIter.hasNext());
+    }
+
+    @Test
+    public void testNext()
+    {
+        Iterator<Document> docIter = paragraph.iterator();
+        expection.expect(NoSuchElementException.class);
+        expection.expectMessage("No Such Element!");
+
+        docIter.next();
     }
 
     @Test

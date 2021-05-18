@@ -35,12 +35,12 @@ public class HtmlOutputConsumer implements Consumer<Document>
 
 	private String outputTitle(Title title)
 	{
-		return "<h" + title.getSize() + ">" + title.getText() + "</h" + title.getSize() + ">";
+		return "<h" + title.getSize() + ">" + title.getText() + "</h" + title.getSize() + ">\n";
 	}
 
 	private String outputParagraph(Paragraph paragraph)
 	{
-		return "<p>" + paragraph.getText() + "</p>";
+		return "<p>" + paragraph.getText() + "</p>\n";
 	}
 
 	private String outputArticle(Article article, int layer)
@@ -49,7 +49,7 @@ public class HtmlOutputConsumer implements Consumer<Document>
 		Document doc;
 		Iterator<Document> docIter = article.iterator();
 
-		s = addIndent(layer - 1) + "<article topic=\'" + article.getText() + "\'>";
+		s = addIndent(layer - 1) + "<article topic=\'" + article.getText() + "\'>\n";
 		strList.add(s);
 
 		while(docIter.hasNext())
@@ -65,7 +65,7 @@ public class HtmlOutputConsumer implements Consumer<Document>
 			strList.add(s);
 		}
 
-		return addIndent(layer - 1) + "</article>";
+		return addIndent(layer - 1) + "</article>\n";
 	}
 
 	private String addIndent(int layer)

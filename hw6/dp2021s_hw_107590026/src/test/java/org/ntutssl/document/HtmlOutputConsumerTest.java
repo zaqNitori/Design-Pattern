@@ -31,10 +31,10 @@ public class HtmlOutputConsumerTest
     
         docList.forEach((doc) -> hoc.accept(doc));
 
-        assertEquals("<h1>" + title.getText() + "</h1>", result.get(0));
-        assertEquals("<article topic=\'" + article.getText() + "\'>", result.get(1));
-        assertEquals("  <p>" + paragraph.getText() + "</p>", result.get(2));
-        assertEquals("</article>", result.get(3));
+        assertEquals("<h1>" + title.getText() + "</h1>\n", result.get(0));
+        assertEquals("<article topic=\'" + article.getText() + "\'>\n", result.get(1));
+        assertEquals("  <p>" + paragraph.getText() + "</p>\n", result.get(2));
+        assertEquals("</article>\n", result.get(3));
     }
 
 }
