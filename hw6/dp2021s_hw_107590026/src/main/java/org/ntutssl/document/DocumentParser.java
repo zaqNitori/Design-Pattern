@@ -25,7 +25,8 @@ class DocumentParser
 				break;
 			case "article":
 				builder.startBuildArticle(text, Integer.valueOf(jObj.get("level").getAsString()));
-				jObj.get("contents").getAsJsonArray().forEach((obj) -> parse(obj.getAsJsonObject()));
+				if(jObj.get("contents") != null)
+					jObj.get("contents").getAsJsonArray().forEach((obj) -> parse(obj.getAsJsonObject()));
 				builder.endBuildArticle();
 				break;
 		}

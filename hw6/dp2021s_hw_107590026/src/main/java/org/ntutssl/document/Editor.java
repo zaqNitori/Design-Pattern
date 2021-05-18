@@ -50,7 +50,11 @@ public class Editor
 
 	public void findContent(String target) 
 	{ 
-		
+		List<Document> docTarget = new ArrayList<>();
+		FindContentConsumer fcc = new FindContentConsumer(docTarget, target);
+		for(Document doc: docList)
+			fcc.accept(doc);
+			
 	}
 
 	public void add(Document document) 
