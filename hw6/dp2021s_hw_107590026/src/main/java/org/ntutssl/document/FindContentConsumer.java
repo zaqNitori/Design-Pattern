@@ -20,7 +20,7 @@ public class FindContentConsumer implements Consumer<Document>
 
 	public void accept(Document document) 
 	{ 
-		if(document.getText().contains(_target))
+		if(document.getText().toLowerCase().contains(_target))
 			docList.add(document);
 
 		if(document.getClass().equals(Article.class))

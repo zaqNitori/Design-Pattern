@@ -2,8 +2,11 @@ package org.ntutssl.document;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 
 import org.junit.Test;
 
@@ -12,6 +15,7 @@ public class EditorTest
 { 
 
     public String filePath = "input/test_input.json";
+    public String outputPath = "output/test_output.html";
     public String text = "hello";
     public Editor editor = new Editor();
     Title title = new Title("I'm a simple title", 1);
@@ -65,6 +69,8 @@ public class EditorTest
         
         editor.importDocumentFromJsonFile(filePath);
         editor.findContent("simple");
+        // editor.importDocumentFromJsonFile("input/main_input.json");
+        // editor.findContent("design pattern");
 
         List<Document> docTarget = editor.getFindContent();
 
@@ -76,8 +82,23 @@ public class EditorTest
     @Test
     public void testExport()
     {
-        editor.importDocumentFromJsonFile("input/sample_input.json");
-        editor.exportDocumentAsHtmlFile("1230");
+        editor.importDocumentFromJsonFile(filePath);
+        editor.exportDocumentAsHtmlFile(outputPath);
+    
+        try(Scanner sc = new Scanner(new File(outputPath)))
+        {
+            assertEquals("<h1>I\'m a simple title</h1>", sc.nextLine().trim());
+            assertEquals("<p>I'm a simple paragraph</p>", sc.nextLine().trim());
+            assertEquals("<article topic='I'm a simple article'>", sc.nextLine().trim());
+            assertEquals("<h2>inner title</h2>", sc.nextLine().trim());
+            assertEquals("<p>inner paragraph</p>", sc.nextLine().trim());
+            assertEquals("</article>", sc.nextLine().trim());
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    
     }
 
 }

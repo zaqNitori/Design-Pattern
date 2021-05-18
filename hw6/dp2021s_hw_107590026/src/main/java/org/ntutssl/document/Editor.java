@@ -1,6 +1,7 @@
 package org.ntutssl.document;
 
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,8 +48,17 @@ public class Editor
 		HtmlOutputConsumer hoc = new HtmlOutputConsumer(strOutputList);
 
 		docList.forEach((doc) -> hoc.accept(doc));
-
-		strOutputList.forEach((str) -> System.out.println(str));
+		
+		try(FileWriter writeFile = new FileWriter(outputPath)) 
+		{
+            for(String str: strOutputList)
+				writeFile.write(str + "\n");
+        } catch (IOException e) 
+		{
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+	
 	}
 
 	public void findContent(String target) 
@@ -58,7 +68,7 @@ public class Editor
 		
 		docList.forEach((doc) -> fcc.accept(doc));
 
-		docTarget.forEach((doc) -> System.out.println(doc.toString()));
+		docTarget.forEach((doc) -> System.out.print(doc.toString()));
 	}
 
 	public List<Document> getFindContent()
