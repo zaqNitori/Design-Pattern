@@ -14,13 +14,14 @@ import org.junit.Test;
 public class EditorTest 
 { 
 
-    public String filePath = "input/test_input.json";
+    public String filePath = "input/sample_input.json";
     public String outputPath = "output/test_output.html";
     public String text = "hello";
     public Editor editor = new Editor();
-    Title title = new Title("I'm a simple title", 1);
-    Paragraph paragraph = new Paragraph("I'm a simple paragraph");
-    Article article = new Article("I'm a simple article", 1);
+
+    Title title = new Title("Object-Oriented Programming", 1);
+    Paragraph paragraph = new Paragraph("This course discusses an overview of the object-oriented programming paradigm.");
+    Article article = new Article("Course Object-Oriented Programming", 1);
 
     @Test
     public void testAdd()
@@ -68,7 +69,7 @@ public class EditorTest
     {
         
         editor.importDocumentFromJsonFile(filePath);
-        editor.findContent("simple");
+        editor.findContent("object-oriented");
 
         List<Document> docTarget = editor.getFindContent();
 
@@ -85,12 +86,18 @@ public class EditorTest
     
         try(Scanner sc = new Scanner(new File(outputPath)))
         {
-            assertEquals("<h1>I\'m a simple title</h1>", sc.nextLine().trim());
-            assertEquals("<p>I'm a simple paragraph</p>", sc.nextLine().trim());
-            assertEquals("<article topic='I'm a simple article'>", sc.nextLine().trim());
-            assertEquals("<h2>inner title</h2>", sc.nextLine().trim());
-            assertEquals("<p>inner paragraph</p>", sc.nextLine().trim());
-            assertEquals("</article>", sc.nextLine().trim());
+            assertEquals("<h1>Object-Oriented Programming</h1>", sc.nextLine());
+            assertEquals("<p>This course discusses an overview of the object-oriented programming paradigm.</p>", sc.nextLine());
+            assertEquals("<article topic='Course Object-Oriented Programming'>", sc.nextLine());
+            assertEquals("  <h2>Information</h2>", sc.nextLine());
+            assertEquals("  <p>Professor: YC Cheng</p>", sc.nextLine());
+            assertEquals("  <article topic='Introduction'>", sc.nextLine());
+            assertEquals("    <h3>What you will learn in this class?</h3>", sc.nextLine());
+            assertEquals("    <p>problem solving, C++, engineering practices</p>", sc.nextLine());
+            assertEquals("  </article>", sc.nextLine());
+            assertEquals("  <h2>References</h2>", sc.nextLine());
+            assertEquals("  <p>https://www.cplusplus.com/</p>", sc.nextLine());
+            assertEquals("</article>", sc.nextLine());      
         }
         catch(IOException e)
         {

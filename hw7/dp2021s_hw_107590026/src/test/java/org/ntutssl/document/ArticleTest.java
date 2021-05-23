@@ -71,6 +71,26 @@ public class ArticleTest
         exception.expectMessage("Invalid action: getSize.");
 
         article.getSize();
+    } 
+
+    @Test
+    public void testRemoveContains()
+    {
+        article.add(article2);
+        assertEquals(1, article.getListSize());
+
+        article.remove(article2);
+        assertEquals(0, article.getListSize());
+    }
+
+    @Test
+    public void testRemoveUnContains()
+    {
+        article.add(article2);
+        assertEquals(1, article.getListSize());
+
+        article.remove(article3);
+        assertEquals(1, article.getListSize());
     }
 
 }
