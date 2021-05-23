@@ -24,7 +24,7 @@ public class CommandManager
 	{
 		if(cmdUndoStack.isEmpty())
 		{
-			System.out.println("No command can be undid.");
+			System.out.print("No command can be undid.\n");
 			return;
 		}
 		
@@ -37,7 +37,7 @@ public class CommandManager
 	{
 		if(cmdRedoStack.isEmpty())
 		{
-			System.out.println("No command can be redid.");
+			System.out.print("No command can be redid.\n");
 			return;
 		}
 	

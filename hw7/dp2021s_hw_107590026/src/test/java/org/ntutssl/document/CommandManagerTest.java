@@ -33,7 +33,7 @@ public class CommandManagerTest
         System.setOut(printStream);
 
         cmdManager.undoCmd();
-        assertEquals("No command can be undid.\r\n", stream.toString());
+        assertEquals("No command can be undid.\n", stream.toString());
     }
 
     @Test
@@ -44,7 +44,7 @@ public class CommandManagerTest
         System.setOut(printStream);
 
         cmdManager.redoCmd();
-        assertEquals("No command can be redid.\r\n", stream.toString());
+        assertEquals("No command can be redid.\n", stream.toString());
     }
 
     @Test

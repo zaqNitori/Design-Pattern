@@ -61,6 +61,8 @@ public class Editor
 
 	public void findContent(String target) 
 	{
+		if(target.equals(""))
+			return;
 		FindContentConsumer	fcc = new FindContentConsumer(docTarget, target);
 		docList.forEach((doc) -> fcc.accept(doc));
 
