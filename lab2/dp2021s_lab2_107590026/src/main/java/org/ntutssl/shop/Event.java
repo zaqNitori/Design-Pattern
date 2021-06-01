@@ -7,22 +7,22 @@ public abstract class Event<T>
 
 	public Event(EventType eventType, T data) 
 	{
-	this.eventType = eventType;
-	this.data = data;
+		this.eventType = eventType;
+		this.data = data;
 	}
 
 	public EventType type() 
 	{
-	return this.eventType;
+		return this.eventType;
 	}
 
 	public T data()
 	{
-	return this.data;
+		return this.data;
 	}
 
 	public int count() 
 	{
-	throw new ShopException("invalid operation");
+		throw new ShopException("invalid operation");
 	}
 }

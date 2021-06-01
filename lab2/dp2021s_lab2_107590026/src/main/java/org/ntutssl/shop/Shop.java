@@ -2,9 +2,15 @@ package org.ntutssl.shop;
 
 public class Shop implements EventListener {
   
-  public Shop() { }  
+  public Shop() 
+  { 
 
-  public void onEvent(Event event) { }
+  }  
+
+  public void onEvent(Event event) 
+  { 
+    
+  }
 
   /**
    * private methods are not necessary, but you can takce them as reference.

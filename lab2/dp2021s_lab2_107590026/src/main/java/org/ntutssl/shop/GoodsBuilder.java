@@ -22,12 +22,16 @@ public class GoodsBuilder
 
 	public void startBuildCollection(int id, String name, String desc) 
 	{ 
+		goods = new Collection(id, name, desc);
+		goodStack.push(goods);
 
 	}
 
 	public void endBuildCollection() 
 	{ 
-
+		goods = goodStack.pop();
+		if(goodStack.isEmpty() == false)
+			goodStack.peek().add(goods);
 	}
 
 	public Goods getResult() 
