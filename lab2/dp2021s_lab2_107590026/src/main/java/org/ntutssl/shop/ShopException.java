@@ -6,11 +6,11 @@ public class ShopException extends RuntimeException
 
 	public ShopException(String errorMessage, Throwable err) 
 	{
-	super(errorMessage, err);
+		super(errorMessage, err);
 	}
 
 	public ShopException (String errorMessage) 
 	{
-	super(errorMessage);
+		super(errorMessage);
 	}
 }

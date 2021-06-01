@@ -10,6 +10,7 @@ public class GoodsBuilder
 
 	public GoodsBuilder() 
 	{ 
+		System.out.print("1231\n");
 		goodStack = new Stack<>();
 	}
 
@@ -24,7 +25,6 @@ public class GoodsBuilder
 	{ 
 		goods = new Collection(id, name, desc);
 		goodStack.push(goods);
-
 	}
 
 	public void endBuildCollection() 

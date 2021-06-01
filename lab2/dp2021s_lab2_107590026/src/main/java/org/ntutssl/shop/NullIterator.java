@@ -7,11 +7,11 @@ public class NullIterator implements Iterator<Goods>
 {
 	public Goods next() 
 	{ 
-	throw new NoSuchElementException("No Such Element!");
+		throw new NoSuchElementException("No Such Element!");
 	}
 
 	public boolean hasNext() 
 	{ 
-	return false;
+		return false;
 	}
 }

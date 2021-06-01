@@ -46,10 +46,7 @@ public class Collection implements Goods
 
 	public String description() 
 	{
-		String out = _desc;
-		for(Goods goods: goodList)
-			out += goods.description();
-		return out;
+		return _desc;
 	}
 
 	@Override
