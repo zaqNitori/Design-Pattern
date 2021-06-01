@@ -1,48 +1,49 @@
 package org.ntutssl.shop;
 
-public enum EventType {
-  /**
-   * user import shopping list
-   */
-  IMPORT_SHOPPING_LIST,
+public enum EventType 
+{
+	/**
+	 * user import shopping list
+	 */
+	IMPORT_SHOPPING_LIST,
 
-  /**
-   * user import replenish list
-   */
-  IMPORT_REPLENISH_LIST,
+	/**
+	 * user import replenish list
+	 */
+	IMPORT_REPLENISH_LIST,
 
-  /**
-   * shop replenish goods
-   */
-  REPLENISH,
-  
-  /**
-   * check remaining stock
-   */
-  CHECK_STOCK,
-  
-  /**
-   * add goods to shopping cart 
-   */
-  ADD_TO_CART,
+	/**
+	 * shop replenish goods
+	 */
+	REPLENISH,
 
-  /**
-   * user pay for all the items in the cart
-   */
-  PAY,
+	/**
+	 * check remaining stock
+	 */
+	CHECK_STOCK,
 
-  /**
-   * purchase goods in the cart from a shop
-   */
-  PURCHASE,
+	/**
+	 * add goods to shopping cart 
+	 */
+	ADD_TO_CART,
 
-  /**
-   * list shopping cart
-   */
-  LIST_CART,
+	/**
+	 * user pay for all the items in the cart
+	 */
+	PAY,
 
-  /**
-   * list shop
-   */
-  LIST_SHOP
+	/**
+	 * purchase goods in the cart from a shop
+	 */
+	PURCHASE,
+
+	/**
+	 * list shopping cart
+	 */
+	LIST_CART,
+
+	/**
+	 * list shop
+	 */
+	LIST_SHOP
 }

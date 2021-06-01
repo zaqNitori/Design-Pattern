@@ -1,11 +1,22 @@
 package org.ntutssl.shop;
 
-public interface Goods {
-  public int id();
-  public double price();
-  public String name();
-  public String description();
+import java.util.Iterator;
 
-  public default void add(Goods goods) { }
-  public default Iterator<Goods> iterator() { }
+public interface Goods 
+{
+	public int id();
+	public double price();
+	public String name();
+	public String description();
+
+	public default void add(Goods goods) 
+	{ 
+		throw new ShopException("Invalid action: add.");
+	}
+
+	public default Iterator<Goods> iterator() 
+	{ 
+		Iterator<Goods> gooditer = new NullIterator();
+		return gooditer;
+	}
 }
