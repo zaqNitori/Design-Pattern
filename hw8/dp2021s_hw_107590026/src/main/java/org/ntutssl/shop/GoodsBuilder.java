@@ -1,14 +1,40 @@
 package org.ntutssl.shop;
 
-public class GoodsBuilder {
+import java.util.Stack;
 
-  public GoodsBuilder() { }
+public class GoodsBuilder 
+{
 
-  public void buildMerchandise(int id, String name, String desc, double price) { }
+  	Stack<Goods> goodStack;
+	Goods goods;
 
-  public void startBuildCollection(int id, String name, String desc) { }
+	public GoodsBuilder() 
+	{ 
+		goodStack = new Stack<>();
+	}
 
-  public void endBuildCollection() { }
-  
-  public Goods getResult() { }
+	public void buildMerchandise(int id, String name, String desc, double price) 
+	{ 
+		goods = new Merchandise(id, name, desc, price);
+		if(goodStack.isEmpty() == false)
+			goodStack.peek().add(goods);
+	}
+
+	public void startBuildCollection(int id, String name, String desc) 
+	{ 
+		goods = new Collection(id, name, desc);
+		goodStack.push(goods);
+	}
+
+	public void endBuildCollection() 
+	{ 
+		goods = goodStack.pop();
+		if(goodStack.isEmpty() == false)
+			goodStack.peek().add(goods);
+	}
+
+	public Goods getResult() 
+	{ 
+		return goods;
+	}
 }

@@ -10,7 +10,6 @@ public class GoodsBuilder
 
 	public GoodsBuilder() 
 	{ 
-		System.out.print("1231\n");
 		goodStack = new Stack<>();
 	}
 

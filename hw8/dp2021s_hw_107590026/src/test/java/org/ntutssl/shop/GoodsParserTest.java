@@ -1,3 +1,6 @@
 package org.ntutssl.shop;
 
-public class GoodsParserTest { }
+public class GoodsParserTest 
+{ 
+    
+}

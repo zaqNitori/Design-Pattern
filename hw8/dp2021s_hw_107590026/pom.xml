@@ -5,10 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.ntutssl</groupId>
-  <artifactId>dp2021s_TA_HW</artifactId>
+  <artifactId>dp2021s_107590026_HW</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>dp2021s_TA_HW</name>
+  <name>dp2021s_107590026_HW</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -30,7 +30,7 @@
     <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
-        <version>19.0</version>
+        <version>30.1.1-jre</version>
     </dependency>
 
     <dependency>

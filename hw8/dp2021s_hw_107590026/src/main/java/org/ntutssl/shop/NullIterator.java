@@ -1,8 +1,17 @@
 package org.ntutssl.shop;
 
-public class NullIterator implements Iterator<Goods> {
+import java.util.Iterator;
 
-  public Goods next() { }
+public class NullIterator implements Iterator<Goods> 
+{
 
-  public boolean hasNext() { }
+	public Goods next() 
+	{ 
+		throw new ShopException("No Such Element!");
+	}
+
+	public boolean hasNext() 
+	{ 
+		return false;
+	}
 }
