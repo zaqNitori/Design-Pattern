@@ -1,9 +1,7 @@
 package org.ntutssl.shop;
 
 import java.util.Map;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Shop implements EventListener 
 {
@@ -53,7 +51,7 @@ public class Shop implements EventListener
 	 */
 	private void checkStock(Event<Goods> event) 
 	{ 
-		Boolean containGood = false;
+		Boolean have = false;
 		for(Map.Entry<Goods, Integer> entry : shopMap.entrySet())
 		{
 			if(entry.getKey().name().equals(event.data().name()))
@@ -61,15 +59,13 @@ public class Shop implements EventListener
 				if(entry.getValue() >= event.count())
 					EventManager.getInstance().publish(new GoodsEvent(EventType.ADD_TO_CART, event.data(), event.count()));
 				else
-					System.out.print("out of stock. goods ID: " + event.data().id() + "\n");
-				containGood = true;
-				break;
+					System.out.print("Out of Stock. goods ID: " + event.data().id() + "\n");
+
+				have = true;
 			}
 		}
-		if(containGood == false)
-		{
+		if(have == false)
 			System.out.print("No Such Goods.\n");
-		}
 	}
 
 	/**
@@ -78,11 +74,45 @@ public class Shop implements EventListener
 	 */
 	private void purchase(Event<Goods> event) 
 	{ 
+		Boolean have = false;
+		for(Map.Entry<Goods, Integer> entry : shopMap.entrySet())
+		{
+			if(entry.getKey().name().equals(event.data().name()))
+			{
+				if(entry.getValue() >= event.count())
+					shopMap.replace(entry.getKey(), entry.getValue() - event.count());
+				else
+					System.out.print("Out of Stock. goods ID: " + event.data().id() + "\n");
 
+				have = true;
+			}
+		}
+		if(have == false)
+			System.out.print("No Such Goods.\n");
 	}
 
 	/**
 	 * show stocks of this shop
 	 */
-	private void listShop() { }
+	private void listShop() 
+	{ 
+		if(shopMap.isEmpty())
+			System.out.print("Sell Nothing\n");
+		else
+		{
+			System.out.print("================================================================================\n");
+			System.out.printf("%-40s%-10s%-10s\n","name","price","count");
+			System.out.print("--------------------------------------------------------------------------------\n");
+			
+			for(Map.Entry<Goods, Integer> entry : shopMap.entrySet())
+				System.out.printf("%-4s%-22s%-40s%-8s%-6s\n"
+				, entry.getKey().id()
+				, entry.getKey().name()
+				, entry.getKey().description()
+				, entry.getKey().price()
+				, entry.getValue());
+
+			System.out.print("================================================================================\n");
+		}
+	}
 }

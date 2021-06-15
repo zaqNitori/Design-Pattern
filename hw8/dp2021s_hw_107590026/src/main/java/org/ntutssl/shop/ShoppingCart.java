@@ -86,8 +86,14 @@ public class ShoppingCart implements EventListener
 	 */
 	private void listCart() 
 	{ 
-		goodList.forEach((event) -> System.out.printf("%-4s%-22s%-40s%-8s%-6s\n"
-			, String.valueOf(event.data().id()), event.data().name(), event.data().description()
-			, event.data().price(), event.count()));
+		for(Map.Entry<Goods, Integer> entry : cartMap.entrySet())
+		{
+			System.out.printf("%-4s%-22s%-40s%-8s%-6s\n"
+			, String.valueOf(entry.getKey().id())
+			, entry.getKey().name()
+			, entry.getKey().description()
+			, entry.getKey().price()
+			, entry.getValue());
+		}
 	}
 }
