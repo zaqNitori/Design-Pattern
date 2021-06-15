@@ -1,14 +1,14 @@
 package org.ntutssl.shop;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-
 public class PayByCreditCardStrategyTest 
 { 
-    PayStrategy strategy = new PayByCreditCardStrategy();
-    EventManager eventManager = EventManager.getInstance();
+    public PayByCreditCardStrategy strategy = new PayByCreditCardStrategy();
+    public EventManager eventManager = EventManager.getInstance();
     
     @Before
     public void init()
@@ -17,9 +17,10 @@ public class PayByCreditCardStrategyTest
     }
 
     @Test
-    public void testCalculateShouldBeCorrect()
+    public void testCalculate()
     {
+
         strategy.calculate(20);
-        //assertEquals("$18.00", strategy);
+        assertEquals("$18.00",strategy.getCalculate());
     }
 }

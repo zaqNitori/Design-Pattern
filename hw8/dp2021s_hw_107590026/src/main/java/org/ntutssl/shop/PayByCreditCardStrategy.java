@@ -9,7 +9,6 @@ public class PayByCreditCardStrategy implements PayStrategy, EventListener
 	private Scanner scanner;
 	private String ans;
 
-
 	public PayByCreditCardStrategy() 
 	{ 
 		eventManager = EventManager.getInstance();
@@ -39,7 +38,7 @@ public class PayByCreditCardStrategy implements PayStrategy, EventListener
 	{
 		return ans;
 	}
-	
+
 	/**
 	 * Card number are 16 digits.
 	 * The format of card expiration date is 'mm/yy', such as '06/21'.
