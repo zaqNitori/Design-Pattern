@@ -67,13 +67,13 @@ public class Shop implements EventListener
 				if(entry.getValue() >= event.count())
 					EventManager.getInstance().publish(new GoodsEvent(EventType.ADD_TO_CART, event.data(), event.count()));
 				else
-					System.out.print("Out of Stock. goods ID: " + event.data().id() + "\n");
+					System.out.print("out of stock. goods ID: " + event.data().id() + "\n");
 
 				have = true;
 			}
 		}
 		if(have == false)
-			System.out.print("No Such Goods.\n");
+			System.out.print("The store doesn't have this goods.\n");
 	}
 
 	/**
@@ -90,13 +90,13 @@ public class Shop implements EventListener
 				if(entry.getValue() >= event.count())
 					shopMap.replace(entry.getKey(), entry.getValue() - event.count());
 				else
-					System.out.print("Out of Stock. goods ID: " + event.data().id() + "\n");
+					System.out.print("out of stock. goods ID: " + event.data().id() + "\n");
 
 				have = true;
 			}
 		}
 		if(have == false)
-			System.out.print("No Such Goods.\n");
+			System.out.print("The store doesn't have this goods.\n");
 	}
 
 	/**
@@ -105,7 +105,7 @@ public class Shop implements EventListener
 	private void listShop() 
 	{ 
 		if(shopMap.isEmpty())
-			System.out.print("Sell Nothing\n");
+			System.out.print("This shop does not sell anything.\n");
 		else
 		{
 			System.out.print("================================================================================\n");

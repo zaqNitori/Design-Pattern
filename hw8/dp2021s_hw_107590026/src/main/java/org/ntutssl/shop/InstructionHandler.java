@@ -93,7 +93,7 @@ public class InstructionHandler
 				eventManager.publish(new StringEvent(EventType.PAY, ""));
 				break;
 			default:
-				System.out.println("Invalid option.");
+				System.out.println("invalid option");
 				break;
 		}
 	}

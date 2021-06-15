@@ -98,7 +98,7 @@ public class ShoppingCartTest
     public void testListCart()
     {
         eventManager.publish(new StringEvent(EventType.LIST_CART, ""));
-        assertEquals("Nothing in ShoppingCart.\n", byteArrayOutputStream.toString());
+        assertEquals("Your shopping cart is empty\n", byteArrayOutputStream.toString());
     }
 
     @Test

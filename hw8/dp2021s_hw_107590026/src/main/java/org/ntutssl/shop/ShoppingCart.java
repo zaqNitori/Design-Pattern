@@ -88,7 +88,7 @@ public class ShoppingCart implements EventListener
 	{ 
 		if(cartMap.isEmpty())
 		{
-			System.out.print("Nothing in ShoppingCart.\n");
+			System.out.print("Your shopping cart is empty\n");
 			return;
 		}
 		System.out.print("================================================================================\n");
