@@ -1,3 +1,11 @@
 package org.ntutssl.shop;
 
-public class PayByBankTransferStrategyTest { }
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class PayByBankTransferStrategyTest 
+{ 
+    
+}
