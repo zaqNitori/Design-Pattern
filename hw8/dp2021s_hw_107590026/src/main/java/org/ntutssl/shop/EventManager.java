@@ -49,10 +49,9 @@ public class EventManager
 
 	public <T> void publish(Event<T> event) 
 	{ 
-		List<EventListener> eventList = subscribers.get(event.type());
-		if(eventList != null)
+		if(subscribers.containsKey(event.type()))
 		{
-			for(EventListener eventListener: eventList)
+			for(EventListener eventListener: subscribers.get(event.type()))
 				eventListener.onEvent(event);
 		}
 	}

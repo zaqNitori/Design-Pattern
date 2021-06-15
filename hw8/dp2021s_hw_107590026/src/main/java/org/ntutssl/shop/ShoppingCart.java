@@ -86,6 +86,14 @@ public class ShoppingCart implements EventListener
 	 */
 	private void listCart() 
 	{ 
+		if(cartMap.isEmpty())
+		{
+			System.out.print("Nothing in ShoppingCart.\n");
+			return;
+		}
+		System.out.print("================================================================================\n");
+		System.out.printf("%-4s%-22s%-40s%-8s%-6s\n", "ID", "name", "description", "price", "count");
+		System.out.print("--------------------------------------------------------------------------------\n");
 		for(Map.Entry<Goods, Integer> entry : cartMap.entrySet())
 		{
 			System.out.printf("%-4s%-22s%-40s%-8s%-6s\n"
@@ -95,5 +103,6 @@ public class ShoppingCart implements EventListener
 			, entry.getKey().price()
 			, entry.getValue());
 		}
+		System.out.print("================================================================================\n");
 	}
 }

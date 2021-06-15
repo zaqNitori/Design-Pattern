@@ -1,11 +1,13 @@
 package org.ntutssl.shop;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,10 +31,10 @@ public class ShopTest
     @Test
     public void testPurcaseWithExistGoods()
     {
-        listener = new TestListener(EventType.ADD_TO_CART);
-
+        assertFalse(shop.isTrigger());
         eventManager.publish(new GoodsEvent(EventType.REPLENISH, merchandise, 50));
         shop.onEvent(new GoodsEvent(EventType.PURCHASE, merchandise, 5));
+        assertTrue(shop.isTrigger());
     }
 
     @Test
@@ -54,17 +56,15 @@ public class ShopTest
     @Test
     public void testCheckStockWithExistGoods()
     {
-        listener = new TestListener(EventType.ADD_TO_CART);
+        assertFalse(shop.isTrigger());
         eventManager.publish(new GoodsEvent(EventType.REPLENISH, merchandise, 50));
         shop.onEvent(new GoodsEvent(EventType.CHECK_STOCK, merchandise, 10));
-
-        assertTrue(((TestListener)listener).getTrigger());
+        assertTrue(shop.isTrigger());
     }
 
     @Test
     public void testCheckStockWithExistGoodsButNoStocks()
     {
-        listener = new TestListener(EventType.ADD_TO_CART);
         eventManager.publish(new GoodsEvent(EventType.REPLENISH, merchandise, 10));
         shop.onEvent(new GoodsEvent(EventType.CHECK_STOCK, merchandise, 20));
 
@@ -74,7 +74,6 @@ public class ShopTest
     @Test
     public void testCheckStockWithNonExistGoods()
     {
-        listener = new TestListener(EventType.ADD_TO_CART);
         shop.onEvent(new GoodsEvent(EventType.CHECK_STOCK, merchandise, 10));
 
         assertEquals("No Such Goods.\n", byteArrayOutputStream.toString());
@@ -88,21 +87,10 @@ public class ShopTest
         assertEquals("Sell Nothing\n", byteArrayOutputStream.toString());
     }
 
-    private class TestListener implements EventListener
+    @After
+    public void end()
     {
-        EventManager eventManager = EventManager.getInstance();
-        public boolean onTrigger = false;
-        public TestListener(EventType type)
-        {
-            eventManager.subscribe(type, this);
-        }
-        public void onEvent(Event event)
-        {
-            onTrigger = true;
-        }
-        public boolean getTrigger()
-        {
-            return onTrigger;
-        }
+        System.setOut(printStream);
     }
+
 }

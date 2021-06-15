@@ -33,7 +33,7 @@ public class Collection implements Goods
 
 	public double price() 
 	{
-		int sum = 0;
+		double sum = 0;
 		for(Goods goods: goodList)
 			sum += goods.price();
 		return sum;

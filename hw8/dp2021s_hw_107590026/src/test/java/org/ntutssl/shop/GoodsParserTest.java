@@ -1,4 +1,5 @@
 package org.ntutssl.shop;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -9,7 +10,6 @@ public class GoodsParserTest
 
     GoodsParser parser;
     EventManager eventManager = EventManager.getInstance();
-    EventListener testListener;
     
     @Before
     public void init()
@@ -21,35 +21,17 @@ public class GoodsParserTest
     @Test
     public void testImportReplenishTriggerPublishReplenish()
     {
-        testListener = new TestListener(EventType.REPLENISH);
+        assertFalse(parser.isTrigger());
         parser.onEvent(new StringEvent(EventType.IMPORT_REPLENISH_LIST, "input/replenish_list.json"));
-        assertTrue(((TestListener)testListener).getTrigger());
+        assertTrue(parser.isTrigger());
     }
 
     @Test
     public void testImportShoppingListTriggerPublishCheckStock()
     {
-        testListener = new TestListener(EventType.CHECK_STOCK);
+        assertFalse(parser.isTrigger());
         parser.onEvent(new StringEvent(EventType.IMPORT_SHOPPING_LIST, "input/shopping_list.json"));
-        assertTrue(((TestListener)testListener).getTrigger());
+        assertTrue(parser.isTrigger());
     }
 
-    private class TestListener implements EventListener
-    {
-        EventManager eventManager = EventManager.getInstance();
-        public boolean onTrigger = false;
-
-        public TestListener(EventType type)
-        {
-            eventManager.subscribe(type, this);
-        }
-        public void onEvent(Event event)
-        {
-            onTrigger = true;
-        }
-        public boolean getTrigger()
-        {
-            return onTrigger;
-        }
-    }
 }

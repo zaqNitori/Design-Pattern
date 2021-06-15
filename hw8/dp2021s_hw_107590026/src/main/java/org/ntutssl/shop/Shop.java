@@ -1,12 +1,14 @@
 package org.ntutssl.shop;
 
 import java.util.Map;
+
 import java.util.HashMap;
 
 public class Shop implements EventListener 
 {
 	private EventManager eventManager;
 	private Map<Goods,Integer> shopMap;
+	private Boolean trigger = false;
 
 	public Shop() 
 	{ 
@@ -20,6 +22,7 @@ public class Shop implements EventListener
 
 	public void onEvent(Event event) 
 	{ 
+		trigger = true;
 		if(event.type() == EventType.REPLENISH)
 			replenish(event);
 		else if(event.type() == EventType.CHECK_STOCK)
@@ -28,6 +31,11 @@ public class Shop implements EventListener
 			purchase(event);
 		else if(event.type() == EventType.LIST_SHOP)
 			listShop();
+	}
+
+	public Boolean isTrigger()
+	{
+		return trigger;
 	}
 
 	/**

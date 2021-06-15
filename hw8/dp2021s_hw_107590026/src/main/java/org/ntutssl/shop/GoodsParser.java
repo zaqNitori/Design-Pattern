@@ -11,20 +11,21 @@ import com.google.gson.stream.JsonReader;
 public class GoodsParser implements EventListener 
 {
 
-	private EventManager eventManager;
+	private EventManager eventManager = EventManager.getInstance();
 	private GoodsBuilder builder;
 	private int count;
+	private Boolean isTrigger = false;
 
 	public GoodsParser() 
 	{ 
 		builder = new GoodsBuilder();
-		eventManager = EventManager.getInstance();
 		eventManager.subscribe(EventType.IMPORT_REPLENISH_LIST, this);
 		eventManager.subscribe(EventType.IMPORT_SHOPPING_LIST, this);
 	}
 
 	public void onEvent(Event event) 
 	{ 
+		isTrigger = true;
 		if(event.type() == EventType.IMPORT_REPLENISH_LIST)
 		{
 			importReplenishmentList(event);
@@ -33,6 +34,11 @@ public class GoodsParser implements EventListener
 		{
 			importShoppingCartList(event);
 		}
+	}
+
+	public Boolean isTrigger()
+	{
+		return isTrigger;
 	}
 
 	/**
