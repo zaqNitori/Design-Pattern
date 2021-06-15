@@ -109,7 +109,7 @@ public class Shop implements EventListener
 		else
 		{
 			System.out.print("================================================================================\n");
-			System.out.printf("%-40s%-10s%-10s\n","name","price","count");
+			System.out.printf("%-4s%-22s%-40s%-8s%-6s\n","ID","name","description","price","count");
 			System.out.print("--------------------------------------------------------------------------------\n");
 			
 			for(Map.Entry<Goods, Integer> entry : shopMap.entrySet())
